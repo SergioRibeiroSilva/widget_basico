@@ -8,7 +8,10 @@ class WidgetScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Minha aplicação')),
       body: Center(
-        child: Text('Olá! Alterando.....', style: TextStyle(fontSize: 50)),
+        child: Text(
+          'Olá! Alterando. de novo....',
+          style: TextStyle(fontSize: 50),
+        ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {}),
     );

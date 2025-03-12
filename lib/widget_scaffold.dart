@@ -1,19 +1,35 @@
+
+
 import 'package:flutter/material.dart';
 
-class WidgetScaffold extends StatelessWidget {
-  const WidgetScaffold({super.key});
+class widgetScaffold extends StatelessWidget {
+  const widgetScaffold({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Minha aplicação')),
-      body: Center(
-        child: Text(
-          'Olá! Alterando. de novo....',
-          style: TextStyle(fontSize: 50),
-        ),
+      appBar: AppBar(
+        title: Text('Minha aplicação'),
+        centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
-    );
+      body: Center(
+        
+      ),  
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.access_alarm),
+        onPressed: () {},
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            Text('Minha'),
+            Icon(Icons.access_alarm_sharp)
+          ],
+        )
+    
+      ),);
   }
 }
+

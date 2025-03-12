@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widget_basico/widget_appbar.dart';
-import 'package:widget_basico/widget_appbar_novos_modelos.dart';
-import 'package:widget_basico/widget_appbar_tab_scroll.dart';
-import 'package:widget_basico/widget_text.dart';
-
+import 'package:widget_basico/stateful_basico.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Coleção de widgets",
       theme: ThemeData(primaryColor: Colors.blue),
-      home: AppBarTabScrollable(),
+      home: WidgetCorPreferida(),
     );
   }
 }
+

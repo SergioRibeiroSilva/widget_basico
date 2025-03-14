@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widget_basico/stateful_basico.dart';
+import 'package:widget_basico/widget_listview_build.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,8 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Coleção de widgets",
       theme: ThemeData(primaryColor: Colors.blue),
-      home: WidgetCorPreferida(),
+      home: ListViewBuild(),
     );
   }
 }
-

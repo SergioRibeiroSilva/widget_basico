@@ -1,11 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 
 List<String> titles = <String>['Cloud 0', 'Beach 1', 'Sunny 2'];
 
 class AppBarTabScrollable extends StatelessWidget {
-  
   const AppBarTabScrollable({super.key});
 
   @override
@@ -20,10 +17,10 @@ class AppBarTabScrollable extends StatelessWidget {
       length: tabsCount,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('AppBar exemplo'),   
+          title: const Text('AppBar exemplo'),
           notificationPredicate: (ScrollNotification notification) {
             return notification.depth == 1;
-          },  
+          },
           scrolledUnderElevation: 4.0,
           shadowColor: Theme.of(context).shadowColor,
           bottom: TabBar(
@@ -42,7 +39,10 @@ class AppBarTabScrollable extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   tileColor: index.isOdd ? oddItemColor : evenItemColor,
-                  title: Text('${titles[0]} $index ' + '?'),
+                  title: Text(
+                    '${titles[0]} $index '
+                    '?',
+                  ),
                 );
               },
             ),
@@ -66,9 +66,7 @@ class AppBarTabScrollable extends StatelessWidget {
             ),
           ],
         ),
-        
       ),
     );
   }
 }
-

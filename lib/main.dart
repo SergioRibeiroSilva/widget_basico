@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:widget_basico/stateful_basico.dart';
+import 'package:widget_basico/api.dart';
+import 'package:widget_basico/user.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,13 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-      ),
-      home: MyHome(),
+      title: "Coleção de widgets",
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: WidgetCorPreferida(),
     );
   }
 }

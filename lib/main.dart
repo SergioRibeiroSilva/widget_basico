@@ -1,69 +1,55 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:widget_basico/api.dart';
-import 'package:widget_basico/user.dart';
+import 'package:widget_basico/api_chuck.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AplicacaoPadrao());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AplicacaoPadrao extends StatelessWidget {
+  const AplicacaoPadrao({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Coleção de widgets",
       theme: ThemeData(primaryColor: Colors.blue),
-      home: BuildListView(),
+      home: BuildListViewChuck(),
     );
   }
 }
 
-class BuildListView extends StatefulWidget {
-  const BuildListView({super.key});
-
+class BuildListViewChuck extends StatefulWidget {
+  const BuildListViewChuck({super.key});
   @override
-  State<BuildListView> createState() => _BuildListViewState();
+  State<BuildListViewChuck> createState() => _BuildListViewChuckState();
 }
 
-class _BuildListViewState extends State<BuildListView> {
-  //var users = new List<User>;
+class _BuildListViewChuckState extends State<BuildListViewChuck> {
+  String valor = "";
 
-  List<User> users = [];
-
-  _getUsers() {
-    API.getUsers().then((response) {
+  _getChuck() {
+    API_chuck.getChuck().then((response) {
       setState(() {
-        Iterable lista = json.decode(response.body);
-        users = lista.map((model) => User.fromJson(model)).toList();
+        var res = json.decode(response.body);
+        valor = res['value'];
       });
     });
   }
 
-  _BuildListViewState() {
-    _getUsers();
+  _BuildListViewChuckState() {
+    _getChuck();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Lista de usuários')),
-      body: listaUsuarios(),
-    );
-  }
-
-  listaUsuarios() {
-    print(users[0].name);
-
-    return ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (context, index) {
-        return ListTile(title: Text(users[index].name.toString()));
-      },
+      appBar: AppBar(title: Text('Chucks.....')),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: Text(valor.toString(), style: TextStyle(fontSize: 30)),
+      ),
     );
   }
 }
-
-//https://jsonplaceholder.typicode.com/users

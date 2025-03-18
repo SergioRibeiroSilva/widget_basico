@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:widget_basico/api_placeholder.dart';
+import 'package:widget_basico/src/views/pages/home_page.dart';
 import 'package:widget_basico/widget_listview_chuck.dart';
 
 void main() {
@@ -12,7 +16,7 @@ class AplicacaoPadrao extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Coleção de widgets",
-      theme: ThemeData(primaryColor: Colors.blue),
+      theme: ThemeData(useMaterial3: true),
       home: BuildListViewChuck(),
     );
   }

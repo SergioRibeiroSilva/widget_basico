@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:widget_basico/api/api_db_diario.dart';
-import 'package:widget_basico/api/api_escola_movimento.dart';
+
+import 'package:widget_basico/api/api_escolamovimento_dio.dart';
 import 'package:widget_basico/api/api_pttc.dart';
 import 'package:widget_basico/model/model_afastamento_policial.dart';
 import 'package:widget_basico/model/model_aluno.dart';
 import 'package:widget_basico/model/model_pttc.dart';
 import 'package:widget_basico/model/model_tarefa_app.dart';
+import 'package:widget_basico/stateful_basico.dart';
 
 class ConsumoGeral extends StatefulWidget {
   const ConsumoGeral({super.key});
@@ -25,9 +27,9 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
   List<AfastamentoPolicial> afastamento_policial = [];
 
   _getAlunos() {
-    setState(() {
-      ApiDbDiario.getAlunos().then((response) {
-        Iterable lista = jsonDecode(response.body);
+    ApiDbDiario.getAlunos().then((response) {
+      Iterable lista = jsonDecode(response.body);
+      setState(() {
         alunos =
             lista
                 .map((model) => Aluno.fromJson(model))
@@ -38,8 +40,8 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
 
   _getPttc() {
     ApiPttc.getPoliciais().then((response) {
+      Iterable lista = jsonDecode(response.body);
       setState(() {
-        Iterable lista = jsonDecode(response.body);
         policiais =
             lista
                 .map(
@@ -50,10 +52,11 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
     });
   }
 
+  /*
   _getTarefas() {
-    setState(() {
-      ApiEscolaMovimento.getTarefas().then((response) {
-        Iterable lista = jsonDecode(response.body);
+    ApiEscolaMovimento.getTarefas().then((response) {
+      Iterable lista = jsonDecode(response.body);
+      setState(() {
         tarefas =
             lista
                 .map((model) => Tarefa.fromJson(model))
@@ -61,11 +64,12 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
       });
     });
   }
+  */
 
   _getAfastamentoPttc() {
-    setState(() {
-      ApiPttc.getAfastamentoPttc(2863).then((response) {
-        Iterable lista = jsonDecode(response.body);
+    ApiPttc.getAfastamentoPttc(2863).then((response) {
+      Iterable lista = jsonDecode(response.body);
+      setState(() {
         afastamento_policial =
             lista
                 .map(
@@ -77,14 +81,21 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
     });
   }
 
-  bordaContainer() {
-    return Border(
-      top: BorderSide(width: 2),
-      bottom: BorderSide(width: 2),
-      left: BorderSide(width: 2),
-      right: BorderSide(width: 2),
-    );
+  //utilizando a biblioteca Dio.....
+  _getTarefasDio() async {
+    var response =
+        await ApiEscolaMovimentoDio.getTarefasDio();
+
+    setState(() {
+      tarefas =
+          (response.data as List)
+              .map(
+                (json) => Tarefa.fromJson(json),
+              ) // Converte cada item para `Tarefa`
+              .toList(); // Converte para List<Tarefa>
+    });
   }
+  //
 
   @override
   void initState() {
@@ -93,12 +104,25 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
     _getAfastamentoPttc();
     _getAlunos();
     _getPttc();
-    _getTarefas();
+    //_getTarefas();
+    _getTarefasDio();
+    setState(() {
+      print("??????????");
+    });
   }
 
   void dispose() {
     _scrollControllerPoliciais.dispose();
     super.dispose();
+  }
+
+  bordaContainer() {
+    return Border(
+      top: BorderSide(width: 2),
+      bottom: BorderSide(width: 2),
+      left: BorderSide(width: 2),
+      right: BorderSide(width: 2),
+    );
   }
 
   @override
@@ -176,8 +200,7 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
                     itemCount: tarefas.length,
                     itemBuilder: (context, index) {
                       return Text(
-                        tarefas[index].nomeDestinatario
-                            .toString(),
+                        tarefas[index].descricao.toString(),
                       );
                     },
                   ),
@@ -218,6 +241,18 @@ class _ConsumoGeralState extends State<ConsumoGeral> {
                   ),
                 ),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder:
+                        (context) =>
+                            const WidgetCorPreferida(),
+                  ),
+                );
+              },
+              child: Text("Ir"),
             ),
           ],
         ),

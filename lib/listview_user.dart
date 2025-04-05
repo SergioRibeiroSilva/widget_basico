@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:widget_basico/api/api.dart';
+import 'package:widget_basico/api/api_place_holder.dart';
 import 'package:widget_basico/model/model_user.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +19,10 @@ class _BuildListViewUserState
 
   _getUsers() {
     API.getUsers().then((response) {
-      setState(() {
+      
         Iterable lista = json.decode(response.body);
         //mapeia e preenche minha lista de usuários
+        setState(() {
         users =
             lista
                 .map((model) => User.fromJson(model))
@@ -30,7 +31,10 @@ class _BuildListViewUserState
     });
   }
 
-  _BuildListViewUserState() {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     _getUsers();
   }
 
@@ -43,13 +47,17 @@ class _BuildListViewUserState
   }
 
   listaUsuarios() {
-    return ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(users[index].name.toString()),
-        );
-      },
+    return Column(
+      children: [
+        ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(users[index].name.toString()),
+            );
+          },
+        ),
+      ],
     );
   }
 }

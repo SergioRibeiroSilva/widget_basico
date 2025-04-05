@@ -93,7 +93,6 @@ class _BuildListViewTarefaState
             ],
           ),
         );
-        ;
       },
     );
   }

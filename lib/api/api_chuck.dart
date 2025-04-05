@@ -9,7 +9,7 @@ class API_chuck {
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print("Resposta: ${response.body}");
+      //print("Resposta: ${response.body}");
     } else {
       print("Erro na requisição: ${response.statusCode}");
     }

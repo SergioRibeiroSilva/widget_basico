@@ -1,11 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
-class widgetScaffold extends StatelessWidget {
-  const widgetScaffold({
-    super.key,
-  });
+class WidgetScaffold extends StatelessWidget {
+  const WidgetScaffold({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +10,7 @@ class widgetScaffold extends StatelessWidget {
         title: Text('Minha aplicação'),
         centerTitle: true,
       ),
-      body: Center(
-        
-      ),  
+      body: Center(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.access_alarm),
         onPressed: () {},
@@ -25,11 +19,10 @@ class widgetScaffold extends StatelessWidget {
         child: Row(
           children: [
             Text('Minha'),
-            Icon(Icons.access_alarm_sharp)
+            Icon(Icons.access_alarm_sharp),
           ],
-        )
-    
-      ),);
+        ),
+      ),
+    );
   }
 }
-

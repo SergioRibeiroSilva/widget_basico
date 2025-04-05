@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 class WidgetAppBar extends StatelessWidget {
   const WidgetAppBar({super.key});
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Meu AppBar"),
@@ -14,9 +13,9 @@ class WidgetAppBar extends StatelessWidget {
             icon: Icon(Icons.add_alert),
             tooltip: 'Show Snackbar',
             onPressed: () {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text('Esse é o snacker')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Esse é o snacker')),
+              );
             },
           ),
           IconButton(
@@ -26,9 +25,10 @@ class WidgetAppBar extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (BuildContext context) {
-
                     return Scaffold(
-                      appBar: AppBar(title: const Text('Next page')),
+                      appBar: AppBar(
+                        title: const Text('Next page'),
+                      ),
                       body: const Center(
                         child: Text(
                           'Essa é a página para a qual fui enviado no click',
@@ -36,7 +36,6 @@ class WidgetAppBar extends StatelessWidget {
                         ),
                       ),
                     );
-                    
                   },
                 ),
               );
@@ -44,7 +43,12 @@ class WidgetAppBar extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(child: Text('Essa é minha página principal', style: TextStyle(fontSize: 24))),
+      body: const Center(
+        child: Text(
+          'Essa é minha página Meu AppBar',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
     );
   }
 }
